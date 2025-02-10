@@ -1,13 +1,13 @@
 
-# toGo - CLI для управления задачами
+# toGo - CLI for Task Management
 
 ![Gopher](gopher.png)
 
-toGo - это простой и удобный CLI-инструмент для управления заметками и задачами. С его помощью вы можете сохранять, удалять заметки и задания, что делает его идеальным помощником для организации вашего времени.
+toGo is a simple and convenient CLI tool for managing notes and tasks. With it, you can save and delete notes and tasks, making it an ideal assistant for organizing your time.
 
-## Установка
+## Installation
 
-Чтобы установить toGo, просто скачайте репозиторий и запустите скрипт `build.sh`:
+To install toGo, simply download the repository and run the `build.sh` script:
 
 ```bash
 git clone https://github.com/Akulalu07/toGo.git
@@ -15,19 +15,22 @@ cd toGo
 ./build.sh
 ```
 
-## Использование
+## Usage
 
-Вот несколько примеров команд, которые вы можете использовать с toGo:
+Here are some examples of commands you can use with toGo:
 
-- **Добавить задачу:** 
+- **Add a task:** 
   ```bash
-  toGo add Купить молоко
+  toGo add Buy milk
   ```
-- **Удалить задачу:** 
+- **Delete a task:** 
   ```bash
   toGo del 1
   ```
-- **Просмотреть все задачи:** 
+- **View all tasks:** 
   ```bash
   toGo list
   ```
+```
+
+Let me know if you need any further assistance!

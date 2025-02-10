@@ -16,7 +16,7 @@ directly from the command line. With toGo, you can easily organize
 your day, track progress, and stay productive.
 
 Usage examples:
-- Add a task: toGo add "Buy milk"
+- Add a task: toGo add Buy milk
 - Delete a task: toGo del 1
 - View all tasks: toGo list
 

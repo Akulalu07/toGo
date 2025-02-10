@@ -16,8 +16,8 @@ var addCmd = &cobra.Command{
 You can specify what you want to add by using the appropriate flags.
 
 Usage examples:
-- Add a task: toGo add --tasks "Buy milk"
-- Add a note: toGo add --notes "Write project ideas"
+- Add a task: toGo add --tasks Buy milk
+- Add a note: toGo add --notes Write project ideas
 
 Please note that you must use only one of the flags 
 (tasks or notes) at a time. If both flags are specified, the command will return an error. 

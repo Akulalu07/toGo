@@ -54,10 +54,7 @@ if ! command -v go &> /dev/null; then
     install_go
 fi
 
-echo "$LANGUAGE_SELECTION_MESSAGE"
-echo "1) English"
-echo "2) Русский"
-read -p "$LANGUAGE_PROMPT_MESSAGE" lang_choice
+lang_choice=1
 
 if [[ "$lang_choice" == "1" ]]; then
     LANGUAGE_DIR="cmd/en"
@@ -84,14 +81,10 @@ else
     exit 1
 fi
 
-# Переход в нужную директорию
-cd "$LANGUAGE_DIR" || { echo "Не удалось перейти в директорию $LANGUAGE_DIR"; exit 1; }
 
-# Сборка проекта
 echo "$BUILD_MESSAGE"
 go build -o toGo main.go
 
-# Определение места назначения
 if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
     DESTINATION="/usr/local/bin/toGo"
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
@@ -101,7 +94,6 @@ else
     exit 1
 fi
 
-# Перемещение скомпилированного файла
 echo "$MOVE_MESSAGE"
 if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
     sudo mv toGo "$DESTINATION"
