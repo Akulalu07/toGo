@@ -113,3 +113,31 @@ func DoneTask(id int) {
 		fmt.Println("Error while updating task:", result.Error)
 	}
 }
+
+func RemessTask(id int, message string) {
+	var task Task
+	result := DbTask.First(&task, id)
+	if result.Error != nil {
+		fmt.Println("Error while searching for task:", result.Error)
+		return
+	}
+	task.Message = message
+	result = DbTask.Save(&task)
+	if result.Error != nil {
+		fmt.Println("Error while updating task:", result.Error)
+	}
+}
+
+func RemessNote(id int, message string) {
+	var note Note
+	result := DbNote.First(&note, id)
+	if result.Error != nil {
+		fmt.Println("Error while searching for task:", result.Error)
+		return
+	}
+	note.Message = message
+	result = DbNote.Save(&note)
+	if result.Error != nil {
+		fmt.Println("Error while updating task:", result.Error)
+	}
+}
