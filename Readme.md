@@ -47,14 +47,3 @@ sudo toGo [command]
 ```
 (Note: This command is intended to display the logo.)
 
-## Contributing
-If you'd like to contribute to toGo, please fork the repository and submit a pull request.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Let me know if you need any further assistance!
-
-```
-Feel free to adjust the suggestions based on your specific needs and the functionality of your tool!
-```
