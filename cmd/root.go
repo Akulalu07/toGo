@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"os"
+	"toGo/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -27,7 +27,7 @@ which simplifies the creation of powerful CLI applications.`,
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		os.Exit(1)
+		utils.Fatal("Something go wrong")
 	}
 }
 

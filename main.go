@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	cmd.Init()
 	db.Dinit()
 	cmd.Execute()
 }

@@ -1,42 +1,43 @@
 package cmd
 
 import (
-	"fmt"
 	"strconv"
 	"toGo/db"
+	"toGo/utils"
 
 	"github.com/spf13/cobra"
 )
 
 // updatemessageCmd represents the updatemessage command
 var updatemessageCmd = &cobra.Command{
-	Use:   "updatemessage",
+	Use:   "updatemessage [id] [message]",
+	Args:  cobra.ExactArgs(2),
 	Short: "Update message in task or note",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := cmd.Flags().GetBool("tasks")
 		if err != nil {
-			fmt.Println("Error retrieving tasks flag:", err)
+			utils.Fatal("Error retrieving tasks flag:", err)
 			return
 		}
 
 		notes, err := cmd.Flags().GetBool("notes")
 		if err != nil {
-			fmt.Println("Error retrieving notes flag:", err)
+			utils.Fatal("Error retrieving notes flag:", err)
 			return
 		}
 		if notes == tasks {
-			fmt.Println("Please use only one flag")
+			utils.Fatal("Please use only one flag")
 			return
 		}
 		if len(args) == 0 {
-			fmt.Println("Please enter the ID")
+			utils.Fatal("Please enter the ID")
 			return
 		}
 		id, err := strconv.Atoi(args[0])
 		message := args[1]
 		if err != nil {
-			fmt.Println("You need to provide a number, error: ", err)
+			utils.Fatal("You need to provide a number, error: ", err)
 			return
 		}
 		if notes {

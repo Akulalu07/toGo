@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"toGo/db"
+	"toGo/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -12,6 +13,7 @@ import (
 var addCmd = &cobra.Command{
 	Use:   "add [message]",
 	Short: "Add a note or task",
+	Args:  cobra.ExactArgs(1),
 	Long: `The add command allows you to add new notes or tasks to your list. 
 You can specify what you want to add by using the appropriate flags.
 
@@ -25,21 +27,21 @@ You also need to provide a message to create a note or task.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := cmd.Flags().GetBool("tasks")
 		if err != nil {
-			fmt.Println("Error retrieving tasks flag:", err)
+			utils.Fatal("Error retrieving tasks flag:", err)
 			return
 		}
 
 		notes, err := cmd.Flags().GetBool("notes")
 		if err != nil {
-			fmt.Println("Error retrieving notes flag:", err)
+			utils.Fatal("Error retrieving notes flag:", err)
 			return
 		}
 		if notes == tasks {
-			fmt.Println("Please use only one flag")
+			utils.Fatal("Please use only one flag")
 			return
 		}
 		if len(args) == 0 {
-			fmt.Println("Please provide a message to create a note or task")
+			utils.Fatal("Please provide a message to create a note or task")
 			return
 		}
 		message := strings.Join(args, " ")
@@ -48,7 +50,7 @@ You also need to provide a message to create a note or task.`,
 		} else {
 			db.AddTask(message)
 		}
-		fmt.Printf("Successfully added: %s\n", message)
+		utils.Good(fmt.Sprintf("Successfully added: %s", message))
 	},
 }
 

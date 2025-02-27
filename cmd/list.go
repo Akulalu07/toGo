@@ -1,14 +1,14 @@
 package cmd
 
 import (
-	"fmt"
 	"toGo/db"
+	"toGo/utils"
 
 	"github.com/spf13/cobra"
 )
 
 var listCmd = &cobra.Command{
-	Use:   "list",
+	Use:   "list -[n/t]",
 	Short: "Get a list of notes or tasks",
 	Long: `The list command allows you to retrieve a nicely formatted list 
 of your tasks or notes. You can choose what you want to view 
@@ -23,17 +23,17 @@ Please note that you can only use one of the flags
 	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := cmd.Flags().GetBool("tasks")
 		if err != nil {
-			fmt.Println("Error retrieving tasks flag:", err)
+			utils.Fatal("Error retrieving tasks flag:", err)
 			return
 		}
 
 		notes, err := cmd.Flags().GetBool("notes")
 		if err != nil {
-			fmt.Println("Error retrieving notes flag:", err)
+			utils.Fatal("Error retrieving notes flag:", err)
 			return
 		}
 		if tasks && notes {
-			fmt.Println("Please use only one flag")
+			utils.Fatal("Please use only one flag")
 			return
 		}
 		if tasks || (len(args) > 0 && args[0][0] == 't') {

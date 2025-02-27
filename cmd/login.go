@@ -1,40 +1,53 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
+	"bytes"
 	"fmt"
+	"io"
+	"net/http"
+	"toGo/utils"
 
 	"github.com/spf13/cobra"
 )
 
 // loginCmd represents the login command
 var loginCmd = &cobra.Command{
-	Use:   "login",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "login [login] [password]",
+	Short: "Login to the server",
+	Args:  cobra.ExactArgs(2),
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("login called")
+		username := args[0]
+		password := args[1]
+
+		url, err := GetServer()
+		if err != nil {
+			utils.Fatal(err)
+		}
+		jsonData := []byte(fmt.Sprintf(`{"username": "%s", "password": "%s"}`, username, password))
+		resp, err := http.Post(url+"/login", "application/json", bytes.NewBuffer(jsonData))
+		if err != nil {
+			utils.Fatal("Error with request:", err)
+			return
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			utils.Fatal("Error with read responce:", err)
+			return
+		}
+
+		if string(body) == "{}" {
+			SetCredentials(username, password)
+			utils.Good(fmt.Sprintf("Log in server: %s with username: %s and password: %s\n", url, username, password))
+		} else {
+			utils.Fatal("Input correct username or password")
+		}
+
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(loginCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// loginCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// loginCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

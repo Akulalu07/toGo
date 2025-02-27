@@ -1,0 +1,8 @@
+notes.db
+tasks.db
+.idea
+toGo
+*.o
+*.exe
+*.out
+go.sum

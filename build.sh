@@ -21,8 +21,8 @@ function print_logo() {
     echo "                            \::::/    /             \::::::/    /             \::::/    /       "
     echo "                             \::/____/               \::::/    /               \::/____/        "
     echo "                              ~~                      \::/____/                 ~~              "
-    echo "                                                                                                 "
-    echo "                                                                                                 "
+    echo "                                                       ~~                                       "
+    echo "                                                                                                "
 }
 
 
